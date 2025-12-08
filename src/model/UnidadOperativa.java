@@ -1,21 +1,28 @@
 package model;
 
-public class UnidadOperativa {
+public abstract class UnidadOperativa {
+    private String id;
     private String nombre;
-    private String comuna;
+    private String region;
 
-    public UnidadOperativa(String nombre, String comuna) {
+    public UnidadOperativa(String id, String nombre, String region) {
+        this.id = id;
         this.nombre = nombre;
-        this.comuna = comuna;
+        this.region = region;
     }
+
+    public String getId() {
+        return id;
+    }
+
     public String getNombre() {
         return nombre;
     }
-    public String getComuna() {
-        return comuna;
+
+    public String getRegion() {
+        return region;
     }
-    @Override
-    public String toString() {
-        return "Unidad Operativa: " + nombre + " | Comuna: " + comuna;
-    }
+
+    // Metodo polimorfico
+    public abstract void mostrarInformacion();
 }
