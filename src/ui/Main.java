@@ -1,13 +1,11 @@
 package ui;
 
-import data.GestorUnidades;
+import data.GestorEntidades;
 
 public class Main {
     public static void main(String[] args) {
-
-        System.out.println("=== Sistema Salmontt - Unidades Operativas ===");
-
-        GestorUnidades gestor = new GestorUnidades();
-        gestor.mostrarUnidades();
+        GestorEntidades gestor = new GestorEntidades();
+        MenuUI menu = new MenuUI(gestor);
+        menu.iniciar();
     }
 }
