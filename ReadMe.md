@@ -1,113 +1,121 @@
-# SalmonttApp — Semana 8
-**Integrando interfaces, polimorfismo y estructuras dinámicas (GUI básica)**
+# Sistema de Gestión Salmontt 🐟
 
-Proyecto Java desarrollado en IntelliJ IDEA como parte de la actividad sumativa individual (Semana 8), para la empresa ficticia **Salmontt** (caso: empresa salmonera).  
-El sistema integra una **interfaz común**, **polimorfismo**, una **colección genérica**, validación de tipos con **instanceof** y una **interfaz gráfica simple** mediante `JOptionPane`.
+## 📌 Descripción General
+Este proyecto corresponde a un prototipo de sistema modular desarrollado en Java para la empresa salmonera **Salmontt**, ubicada en Puerto Montt.  
+El objetivo del sistema es organizar y gestionar información relacionada con personas, productos y órdenes de compra, aplicando los principios fundamentales de la Programación Orientada a Objetos (POO).
 
----
-
-## Objetivo de la actividad
-Fortalecer y ampliar un sistema orientado a objetos incorporando:
-
-- Interfaz de comportamiento común (**contrato**).
-- Herencia y polimorfismo para manejar distintas entidades desde una misma colección.
-- Colección genérica (`ArrayList<Registrable>`) para almacenar objetos heterogéneos.
-- Diferenciación por tipo en tiempo de ejecución usando `instanceof`.
-- Interfaz visual básica (GUI) para ingresar y visualizar registros.
+El sistema no reemplaza un ERP, sino que actúa como una base técnica escalable para futuras versiones.
 
 ---
 
-## Funcionalidades implementadas
-- ✅ Interfaz `Registrable` con método `mostrarResumen()`.
-- ✅ Clases que implementan `Registrable` (por ejemplo: **Proveedor**, **Empleado**).
-- ✅ Gestión de entidades con `ArrayList<Registrable>` en `GestorEntidades`.
-- ✅ Recorrido polimórfico de la colección y conteo por tipo usando `instanceof`.
-- ✅ GUI con `JOptionPane`:
-    - Registrar Proveedor
-    - Registrar Empleado
-    - Visualizar reporte de entidades en pantalla y también por consola
+## 🧱 Arquitectura del Proyecto
+
+El proyecto está organizado en paquetes según su responsabilidad:
+
+scr/
+-ui/ -> Punto de entrada del sistema (Main)
+-model/ -> Clases del dominio (Personas, Productos, Ordenes)
+-interfaces/ -> Utilidades (lectura de archivos)
+-data/ -> Archivos.txt con datos de prueba
 
 ---
 
-## Estructura del proyecto
-El proyecto está organizado de forma modular en paquetes:
-src/
-model/ -> entidades e interfaz (POO)
-data/ -> gestor y colección genérica
-ui/ -> interfaz gráfica y ejecución
+## 🧠 Principios de POO Aplicados
 
-### Paquete `model/`
-- `Registrable`: interfaz común con `mostrarResumen()`.
-- `Entidad`: clase base abstracta con `id`.
-- `Proveedor`: entidad de proveedores.
-- `Empleado`: entidad de colaboradores internos.
-
-### Paquete `data/`
-- `GestorEntidades`:
-    - Mantiene la colección `ArrayList<Registrable>`
-    - Agrega entidades
-    - Recorre y genera un **reporte**
-    - Diferencia tipos con `instanceof`
-
-### Paquete `ui/`
-- `MenuUI`: menú interactivo con `JOptionPane`.
-- `Main`: punto de entrada del sistema.
+✔ Encapsulamiento (atributos privados y getters)  
+✔ Herencia (`Persona` → `Empleado`, `Cliente`)  
+✔ Polimorfismo (listas de tipo `Registrable`)  
+✔ Interfaces (`Registrable`)  
+✔ Composición (`OrdenDeCompra` contiene productos y cliente)  
+✔ Colecciones (`ArrayList`)  
+✔ Manejo de excepciones (validación de RUT)  
+✔ Lectura de archivos `.txt`
 
 ---
 
-## Requisitos
-- IntelliJ IDEA
+## 📦 Clases Principales
+
+### 🔹 Persona (abstract)
+Clase base que representa a una persona del sistema.  
+Implementa la interfaz `Registrable`.
+
+Atributos:
+- nombre
+- rut
+- direccion
 
 ---
 
-## Cómo ejecutar
-1. Abrir el proyecto en IntelliJ IDEA.
-2. Ejecutar la clase `Main`.
-3. En la GUI:
-    - Elegir opción **1** para registrar un Proveedor.
-    - Elegir opción **2** para registrar un Empleado.
-    - Elegir opción **3** para ver el reporte.
+### 🔹 Empleado
+Hereda de `Persona`.  
+Representa a los trabajadores de la empresa.
+
+Atributos:
+- cargo
 
 ---
 
-## Ejemplo de uso (GUI)
-- Registrar Proveedor:
-    - ID: `PROV-001`
-    - Empresa: `AquaFeed Ltda`
-    - Rubro: `Alimentos`
-    - Teléfono: `+56 9 1234 5678`
-
-- Registrar Empleado:
-    - ID: `EMP-001`
-    - Nombre: `María Pérez`
-    - Cargo: `Analista`
-    - Área: `Administración`
-
-- Ver Reporte:
-    - Muestra el listado usando `mostrarResumen()`
-    - Incluye conteo por tipo usando `instanceof`
+### 🔹 Cliente
+Hereda de `Persona`.  
+Representa a los clientes que realizan órdenes de compra.
 
 ---
 
-## Conceptos aplicados (Semana 8)
-- **Interfaz:** `Registrable`
-- **Polimorfismo:** manejo de objetos distintos desde `Registrable`
-- **Colecciones genéricas:** `ArrayList<Registrable>`
-- **Validación de tipos:** `instanceof`
-- **GUI básica:** `JOptionPane`
+### 🔹 Producto
+Representa los productos comercializados por la empresa.
+
+Atributos:
+- nombre
+- precio
 
 ---
 
-## Video de presentación (Kaltura)
-En el video se explica:
-- Jerarquía/clases e interfaz utilizada.
-- Cómo se recorren objetos desde la colección.
-- Diferenciación por tipo usando `instanceof`.
-- Ejecución con ingreso de datos por GUI y visualización del reporte.
+### 🔹 OrdenDeCompra
+Representa una orden asociada a un cliente y una lista de productos.
+
+Funcionalidades:
+- Agregar productos
+- Mostrar orden completa
 
 ---
 
+## 📄 Uso de Archivos
 
-## 👩‍💻 Autora
+El sistema carga empleados desde un archivo externo:
 
-Proyecto desarrollado por **Javiera Gutiérrez**, estudiante de Desarrollo de Aplicaciones.
+📁 `data/empleados.txt`
+
+Formato:
+Nombre;Cargo
+
+Ejemplo:
+Ana Soto;Ventas
+
+Pedro Perez;Logística
+
+Maria Lopez;Administración
+
+La lectura del archivo se realiza mediante la clase utilitaria `ArchivoUtil`.
+
+---
+
+## ▶️ Ejecución del Proyecto
+
+1. Clonar el repositorio: git clone https://github.com/javigutierrezra/SalmonttAppDuoc-poo.git
+2. Abrir el proyecto en IntelliJ IDEA.
+3. Ejecutar la clase: ui.Main
+---
+
+## 🎥 Video de Presentación
+El proyecto incluye un video demostrativo donde se muestra:
+- Ejecución del sistema
+- Explicación de las clases y paquetes
+- Uso de herencia, interfaces y polimorfismo
+- Lectura desde archivos `.txt`
+
+---
+
+## 👩‍💻 Autor
+Proyecto desarrollado por **Javiera Gutiérrez**  
+Asignatura: Desarrollo Orientado a Objetos I  
+Año: 2025

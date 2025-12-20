@@ -1,0 +1,3 @@
+Ana Soto;Ventas
+Pedro Pérez;Logística
+María López;Administración

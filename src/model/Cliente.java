@@ -1,16 +1,14 @@
 package model;
 
-public class Empleado extends Persona {
-    private String cargo;
+public class Cliente extends Persona {
 
-    public Empleado(String nombre, Rut rut, Direccion direccion, String cargo) {
+    public Cliente(String nombre, Rut rut, Direccion direccion) {
         super(nombre, rut, direccion);
-        this.cargo = cargo;
     }
 
     @Override
     public void registrar() {
-        System.out.println("Empleado registrado: " + nombre);
+        System.out.println("Cliente registrado: " + nombre);
     }
 
     @Override
@@ -19,9 +17,8 @@ public class Empleado extends Persona {
     }
     @Override
     public String toString() {
-        return "Empleado{" +
+        return "Cliente{" +
                 "nombre='" + nombre + '\'' +
-                ", cargo='" + cargo + '\'' +
                 ", rut=" + rut +
                 ", direccion=" + direccion +
                 '}';
